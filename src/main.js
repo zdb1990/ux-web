@@ -10,9 +10,12 @@ import './../node_modules/element-ui/lib/index.js';
 import './../static/css/reset.css';
 //引入 iconfont
 import './../static/iconfont/iconfont.css';
+//全局配置自定义指令
+import plugins from'./plugins/plugins.js';
 import ElementUi from 'element-ui';
 Vue.config.productionTip = false
 Vue.use(ElementUi);
+Vue.use(plugins);
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

@@ -5,7 +5,7 @@
            <p>登录页</p>
            <br>
             <label>用户名:</label>
-            <input type="text" v-model="user"><br>
+            <input type="text" v-model="user" v-focus><br>
             <label>密码: </label>
             <input type="password" v-model="pass"><br>
             <button @click="add">注册</button>
