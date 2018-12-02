@@ -8,16 +8,14 @@ const Routes = new Router({
 });
 
 Routes.beforeEach((to, from, next) => {
-    const publicPage = '/login';
+    const publicPage = ['/login'];
     const authreq = !publicPage.includes(to.path);
     // console.log(to, token, authreq);
-    if (!token) {
+    if ( authreq && !token) {
         console.log(1);
-        next();
-    } else {
-        console.log(2);
         next('/login');
     }
+    next();
 })
 
 export default Routes;

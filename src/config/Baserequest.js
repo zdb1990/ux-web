@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Options from './_header';
+import Routes from './../router/index';
 const BaseUrl = "http://localhost:8080";
 //创建axios的新实例.
 const server = axios.create(Options);
@@ -34,7 +35,6 @@ const methodsFunc = {
     }
 }
 
-
 server.interceptors.request.use((config) => {
     console.log(config);
     return config;
@@ -42,8 +42,24 @@ server.interceptors.request.use((config) => {
     return Promise.reject(err);
 });
 server.interceptors.response.use((res) => {
+    res=res.data;
+    console.log(1);
     return res;
 }, (err) => {
-    return Promise.reject(err);
+    if (err.response) {
+        switch (err.response.status) {
+          case 401:
+            // 401 清除token信息并跳转到登录页面
+            sessionStorage.removeItem('user');
+            // 只有在当前路由不是登录页面才跳转
+            Routes.currentRoute.path !== 'login' &&
+            Routes.replace({
+                path: 'login',
+                query: { redirect:Routes.currentRoute.path },
+            })
+        }
+      }
+      // console.log(JSON.stringify(error));//console : Error: Request failed with status code 402
+      return Promise.reject(err.response.data)
 })
 export default methodsFunc;
