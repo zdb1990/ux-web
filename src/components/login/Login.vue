@@ -1,4 +1,5 @@
 <template>
+
    <div class="login-page">
        <div class="login-main">
            <p>登录页</p>
@@ -27,17 +28,21 @@ import comUrl from './../../config/comUrl';
            submit(){
                methodsFunc.Post(comUrl.login,{user:this.user,pass:this.pass}).then((res)=>{
                    console.log(res)
+                   if(res.success){
+                       sessionStorage.setItem('user',res.session);
+                       this.$router.push({path:'content'});
+                   }
                }).catch((err)=>{
                    console.log(err);
                })
            },
-           add(){
-              methodsFunc.Post(comUrl.add_user,{user:this.user,pass:this.pass}).then((res)=>{
-                   console.log(res)
-               }).catch((err)=>{
-                   console.log(err);
-               })
-           }
+            add(){
+        //       methodsFunc.Post(comUrl.add_user,{user:this.user,pass:this.pass}).then((res)=>{
+        //            console.log(res)
+        //        }).catch((err)=>{
+        //            console.log(err);
+        //        })
+          }
        }
    }
 </script>
