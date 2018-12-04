@@ -97,21 +97,21 @@
   /* 菜单列表样式*/
   /*子菜单收起*/
     .menu-tree{
-        height:0;
-        overflow: hidden;
-        opacity: 0;
-        transition: 2s all ease;
+         display: none;
+         overflow: hidden;
     }
     .open{
-        // height:200px;
-        // height: none !important;
-        // height: 400px;
-        // min-height:100px;
-        opacity: 1;
-        overflow:visible;
-        transition: 2s all ease;
+        display: block;
+        animation: hideIndex 1s;
+        -moz-animation: hideIndex  1s; /* Firefox */
+        -webkit-animation: hideIndex  1s; /* Safari and Chrome */
+        -o-animation: hideIndex  1s; /* Opera */
     }
-   
+    @keyframes hideIndex{
+        from{ opacity: 0; transform: translateY(-800px, 0) }
+        to{opacity: 1; transform: translateY(0, 0) }
+    }
+
   .bg-color{
        background: #626161;
   }
