@@ -1,51 +1,53 @@
 <template>
     <div class="menu-body">
-       <el-menu
-            default-active="1"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
-            background-color="#545c64"
-            text-color="#fff"
-            active-text-color="#ffd04b">
-            <el-submenu index="1">
-                <template slot="title">
-                    <span>总览</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="1-1">选项1</el-menu-item>
-                    <el-menu-item index="1-2">选项2</el-menu-item>
-                </el-menu-item-group>
-                <el-submenu index="1-3">
-                     <template slot="title">选项4</template>
-                     <el-menu-item index="1-4-1">选项1</el-menu-item>
-                </el-submenu>
-            </el-submenu>
-            <el-menu-item index="2">
-                <i class="icon iconfont icon-cunchu1"></i>
-                <span slot="title">存储</span>
-            </el-menu-item>
-            <el-menu-item index="3">
-                <i class="icon iconfont icon-jiankong2"></i>
-                <span slot="title">监控</span>
-            </el-menu-item>
-            <el-menu-item index="4">
-                <i class="icon iconfont icon-zonglan-copy"></i>
-                <span slot="title">权限</span>
-            </el-menu-item>
-        </el-menu>
+        <menu-item :data="menuData"></menu-item>
     </div>
 </template>
 
 <script>
     export default {
+        data(){
+          return{
+              //菜单树的数据
+              menuData:[
+                  {name:'存储',url:'/overview',level:1,icon:'icon-icon1',isOpen:false,id:1,
+                   children:[
+                      {name:'server1',url:'/add',level:2,isOpen:false,id:11,
+                        children:[
+                            {name:'server1-1',url:'/index',level:3,isOpen:false,id:111,
+                                children:[
+                                    {name:'server2-1',url:'/com',level:4,isOpen:false,id:1111,
+                                        children:[
+                                            {name:'server2-1-1',url:'/end',level:5,id:11111,isOpen:false}
+                                        ]},
+                                    {name:'server2-2',url:'/font',level:4,id:2222,isOpen:false}
+                                ]},
+                            {name:'server2-1',level:3,url:'/hehe',isOpen:false,id:222,
+                                children:[
+                                    {name:'server2-1',url:'/side',level:4,isOpen:false,id:3232,
+                                        children:[
+                                            {name:'server2-1-1',url:'/name',level:5,id:34223,isOpen:false}
+                                        ]},
+                                    {name:'server2-2',level:4,url:'/login',id:2222,isOpen:false}
+                                ]
+                            },
+                            {name:'菜单1-1-3',url:'/haha',level:3,isOpen:false,id:333}
+                        ]},
+                      {name:'server2',url:'/login',level:2,id:22,isOpen:false},
+                      {name:'server3',url:'/login', level:2,id:33,isOpen:false},
+                  ]},
+                  {name:'菜单二',url:'/login',level:1,icon:'icon-cunchu1',isOpen:false,id:2},
+                  {name:'菜单三',url:'/login',level:1,icon:'icon-bp-',isOpen:false,id:3},
+                  {name:'菜单四',url:'/login',level:1,isOpen:false,id:4,
+                    children:[
+                        {name:'菜单4-1',url:'/login',level:2,id:41,isOpen:false},
+                        {name:'菜单4-2',url:'/login',level:2,id:42,isOpen:false},
+                        {name:'菜单4-3',url:'/login',level:2,id:43,isOpen:false}
+                    ]}
+              ]
+          }
+        },
         methods: {
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            }
         }
     }
 </script>
@@ -57,11 +59,7 @@
        overflow-y: auto;
        float: left;
    }
-   .el-menu{
-      border-right:none;
-      height: 100%;
-   }
-   .route-path{
-       color: #ffffff;
+   .ant-menu{
+       width:200px !important;
    }
 </style>

@@ -42,24 +42,26 @@ server.interceptors.request.use((config) => {
     return Promise.reject(err);
 });
 server.interceptors.response.use((res) => {
-    res=res.data;
+    res = res.data;
     console.log(1);
     return res;
 }, (err) => {
     if (err.response) {
+        console.log(Routes.currentRoute.path)
         switch (err.response.status) {
-          case 401:
-            // 401 清除token信息并跳转到登录页面
-            sessionStorage.removeItem('user');
-            // 只有在当前路由不是登录页面才跳转
-            Routes.currentRoute.path !== 'login' &&
-            Routes.replace({
-                path: 'login',
-                query: { redirect:Routes.currentRoute.path },
-            })
+            case 401:
+                // 401 清除token信息并跳转到登录页面
+                sessionStorage.removeItem('user');
+
+                // 只有在当前路由不是登录页面才跳转
+                Routes.currentRoute.path !== 'login' &&
+                    Routes.replace({
+                        path: 'login',
+                        // query: { redirect: Routes.currentRoute.path }
+                    })
         }
-      }
-      // console.log(JSON.stringify(error));//console : Error: Request failed with status code 402
-      return Promise.reject(err.response.data)
+    }
+    // console.log(JSON.stringify(error));//console : Error: Request failed with status code 402
+    return Promise.reject(err.response.data)
 })
 export default methodsFunc;

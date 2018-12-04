@@ -1,16 +1,22 @@
 <template>
-
-   <div class="login-page">
-       <div class="login-main">
-           <p>登录页</p>
-           <br>
-            <label>用户名:</label>
-            <input type="text" v-model="user" v-focus><br>
-            <label>密码: </label>
-            <input type="password" v-model="pass"><br>
-            <button @click="add">注册</button>
-            <button @click="submit">登陆</button>
-       </div>
+<div class="login-page">
+    <v-row class="signin-main" :gutter="24">
+         <v-col class="gutter-row" span="6" offset="9">
+            <v-form class="user-from" direction="vertical" :model="userFrom" :rules="rules" ref="userFrom">
+                <v-form-item label="账户"  prop="user">
+                        <v-input placeholder="请输入账户名"  v-model="userFrom.user"></v-input>
+                </v-form-item>
+                <v-form-item label="密码"  prop="pass">
+                        <v-input placeholder="请输入密码" v-model="userFrom.pass"></v-input>
+                </v-form-item>
+                 <v-form-item  class="btn-box" style="margin-top:24px">
+                    <v-button type="primary" @click.prevent="signIn('userFrom','add')">注册</v-button>
+                    <v-button type="primary" @click.prevent="signIn('userFrom','signin')">登录</v-button>
+                    <v-button type="primary" @click.prevent="resetForm('userFrom')">重置</v-button>
+                </v-form-item>
+            </v-form>
+         </v-col>
+    </v-row>
    </div>
 </template>
 
@@ -20,35 +26,88 @@ import comUrl from './../../config/comUrl';
    export default {
        data(){
            return{
-               user:'',
-               pass:''
+               //表单数据
+               userFrom:{
+                 user:'',
+                 pass:''
+               },
+               //校验的规则
+               rules:{
+                user:[
+                    {required:true,message:'请输入用户名'}
+                ],
+                pass:[
+                    {required:true,message:'请输入密码'}
+                ]
+               }
            }
        },
        methods:{
-           submit(){
-               methodsFunc.Post(comUrl.login,{user:this.user,pass:this.pass}).then((res)=>{
-                   console.log(res)
-                   if(res.success){
-                       sessionStorage.setItem('user',res.session);
-                       this.$router.push({path:'content'});
-                   }
-               }).catch((err)=>{
-                   console.log(err);
-               })
+           //登陆
+           signIn(name,type){
+                //提交验证
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        let params={user:this.userFrom.user,pass:this.userFrom.pass}
+                        if(type==='signin'){
+                            //登陆
+                             methodsFunc.Post(comUrl.login,params).then((res)=>{
+                                if(res.success){
+                                    sessionStorage.setItem('user',res.session);
+                                    this.$message['success']("登陆成功");
+                                    this.$router.push({path:'content'});
+                                  }
+                                }).catch((err)=>{
+                                    console.log(err);
+                                    if(!err.success){
+                                        this.$message['error']("用户名或密码错误");
+                                    }
+                             })
+                        }else{
+                            methodsFunc.Post(comUrl.add_user,params).then((res)=>{
+                                 console.log(res)
+                                if(res.success){
+                                     this.$message['success']("注册成功");
+                                }
+                            }).catch((err)=>{
+                                console.log(err);
+                                if(!err.success){
+                                    this.$message['error']("用户名已被注册");
+                                }
+                            })
+                        }
+                    } else {
+                        return false;
+                    }
+                });
            },
-            add(){
-        //       methodsFunc.Post(comUrl.add_user,{user:this.user,pass:this.pass}).then((res)=>{
-        //            console.log(res)
-        //        }).catch((err)=>{
-        //            console.log(err);
-        //        })
-          }
+           //重置
+            resetForm(name) {
+            this.$refs[name].resetFields();
+           }
        }
    }
 </script>
 
 <style lang="scss">
-   .login-main{
-       text-align: center;
-   }
+   
+      .login-page{
+          width:100%;
+          height: 100%;
+      }
+      .signin-main{
+          width:100%;
+          height: 100%;
+      }
+      .gutter-row{
+          height: 100%;
+      }
+      .user-from{
+          position: relative;
+          top:50%;
+          transform: translateY(-50%);
+      }
+      .btn-box  .ant-form-item-control{
+          text-align: center;
+      }
 </style>
