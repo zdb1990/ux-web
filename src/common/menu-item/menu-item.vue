@@ -36,7 +36,11 @@
                if(data&&data.length){
                    data.map(value=>{
                        if(value.id===id){
-                           console.log(this.activeIndex);
+                           if(!value['isOpen']&&value.children&&value.children.length){
+                                   value.children.map(item=>{
+                                       item['isOpen']=false;
+                                   })
+                           }
                            value['isOpen']=!value['isOpen'];
                         }else{
                             value['isOpen']=false;
@@ -102,10 +106,10 @@
     }
     .open{
         display: block;
-        animation: hideIndex 2s ease;
-        -moz-animation: hideIndex  2s ease; /* Firefox */
-        -webkit-animation: hideIndex  2s ease; /* Safari and Chrome */
-        -o-animation: hideIndex  2s ease; /* Opera */
+        animation: hideIndex 2s ease-in;
+        -moz-animation: hideIndex  2s ease-in; /* Firefox */
+        -webkit-animation: hideIndex  2s ease-in; /* Safari and Chrome */
+        -o-animation: hideIndex  2s ease-in; /* Opera */
     }
     @keyframes hideIndex{
         0%{ transform: translateY(-800px, 0); opacity: 0 };
