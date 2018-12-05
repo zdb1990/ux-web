@@ -102,14 +102,15 @@
     }
     .open{
         display: block;
-        animation: hideIndex 1s;
-        -moz-animation: hideIndex  1s; /* Firefox */
-        -webkit-animation: hideIndex  1s; /* Safari and Chrome */
-        -o-animation: hideIndex  1s; /* Opera */
+        animation: hideIndex 2s ease;
+        -moz-animation: hideIndex  2s ease; /* Firefox */
+        -webkit-animation: hideIndex  2s ease; /* Safari and Chrome */
+        -o-animation: hideIndex  2s ease; /* Opera */
     }
     @keyframes hideIndex{
-        from{ opacity: 0; transform: translateY(-800px, 0) }
-        to{opacity: 1; transform: translateY(0, 0) }
+        0%{ transform: translateY(-800px, 0); opacity: 0 };
+        75%{transform: translateY(-50px, 0); opacity: 0.8 };
+        100%{ transform: translateY(0, 0);opacity: 1 }
     }
 
   .bg-color{

@@ -38,11 +38,11 @@
                   ]},
                   {name:'菜单二',url:'/login',level:1,icon:'icon-cunchu1',isOpen:false,id:2},
                   {name:'菜单三',url:'/login',level:1,icon:'icon-bp-',isOpen:false,id:3},
-                  {name:'菜单四',url:'/login',level:1,isOpen:false,id:4,
+                  {name:'菜单四',url:'/overview/dse',level:1,isOpen:false,id:4,
                     children:[
-                        {name:'菜单4-1',url:'/login',level:2,id:41,isOpen:false},
-                        {name:'菜单4-2',url:'/login',level:2,id:42,isOpen:false},
-                        {name:'菜单4-3',url:'/login',level:2,id:43,isOpen:false}
+                        {name:'菜单4-1',url:'/overview/csd',level:2,id:41,isOpen:false},
+                        {name:'菜单4-2',url:'/overview/ll',level:2,id:42,isOpen:false},
+                        {name:'菜单4-3',url:'/overview/sww',level:2,id:43,isOpen:false}
                     ]}
               ]
           }
