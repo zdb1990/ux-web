@@ -33,11 +33,11 @@
                             },
                             {name:'菜单1-1-3',url:'/haha',level:3,isOpen:false,id:333}
                         ]},
-                      {name:'server2',url:'/login',level:2,id:22,isOpen:false},
-                      {name:'server3',url:'/login', level:2,id:33,isOpen:false},
+                      {name:'server2',url:'/overview/xcd',level:2,id:22,isOpen:false},
+                      {name:'server3',url:'/overview/dcf', level:2,id:33,isOpen:false},
                   ]},
-                  {name:'菜单二',url:'/login',level:1,icon:'icon-cunchu1',isOpen:false,id:2},
-                  {name:'菜单三',url:'/login',level:1,icon:'icon-bp-',isOpen:false,id:3},
+                  {name:'菜单二',url:'/overview/edf',level:1,icon:'icon-cunchu1',isOpen:false,id:2},
+                  {name:'菜单三',url:'/overview/cxw',level:1,icon:'icon-bp-',isOpen:false,id:3},
                   {name:'菜单四',url:'/overview/dse',level:1,isOpen:false,id:4,
                     children:[
                         {name:'菜单4-1',url:'/overview/csd',level:2,id:41,isOpen:false},

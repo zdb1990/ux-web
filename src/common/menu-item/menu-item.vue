@@ -3,7 +3,7 @@
          <ul class="menu-main">
             <li class="menu-item" v-for="(menu,index) in data" :key="index" @click.stop.prevent="singTap(menu)">
                 <!-- 判断是否有子元素显示展开箭头 -->
-                 <router-link tag='div' :to='menu.url' active-class="bg-color" class="item-list" :style="{'padding-left':menu.level*padLef+'px'}" :class="{'bg-color':menu.id===activeIndex}">
+                 <router-link tag='div' :to='menu.url' active-class="bg-color" class="item-list" :style="{'padding-left':menu.level*padLef+'px'}" >
                       <slot v-if=" menu.children && menu.children.length>0 ">
                         <!-- <span class="pull-left" :style="menu.isOpen ? 'transform: rotate(-180deg)':'transform:rotate(0deg)'"><i class="icon iconfont icon-jiantou-copy-copy-copy"></i></span>   -->
                         <i class="icon iconfont icon-jiantou-copy-copy-copy ionc-rotate" :style="menu.isOpen ? 'transform: rotate(-180deg)':'transform:rotate(0deg)'"></i>
