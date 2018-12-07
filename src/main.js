@@ -13,12 +13,18 @@ import './../static/iconfont/iconfont.css';
 //全局配置自定义指令
 import plugins from './plugins/plugins.js';
 import vueBeauty from 'vue-beauty';
+//树形菜单
 import menuItem from './common';
+//下拉树
+import TreeSelect from './common/tree-select';
+import Vuex from 'vuex';
 //使用菜单组件
 Vue.config.productionTip = false
 Vue.use(plugins);
 Vue.use(vueBeauty);
 Vue.use(menuItem);
+Vue.use(Vuex);
+Vue.use(TreeSelect);
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
